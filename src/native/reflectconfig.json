@@ -1,0 +1,12 @@
+
+[
+  {
+    "name" : "com.github.benmanes.caffeine.cache",
+    "allDeclaredConstructors" : true,
+    "allPublicConstructors" : true,
+    "allDeclaredMethods" : true,
+    "allPublicMethods" : true,
+    "allDeclaredClasses" : true,
+    "allPublicClasses" : true
+  }
+]

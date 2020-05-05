@@ -43,7 +43,7 @@ graalVMNativeImageOptions ++= Seq(
     // "--initialize-at-build-time=io.netty.buffer",
     // "--initialize-at-build-time=io.netty.buffer.UnpooledUnsafeDirectByteBuf",  
     // "-H:CLibraryPath=/Users/alessandro/Downloads/netty-tcnative-boringssl-static-2.0.30.Final-osx-x86_64/META-INF/native",
-    "-H:IncludeResources=**/build.properties",
+    "-H:IncludeResources=.*/.*\\.properties",
     "-H:IncludeResources=META-INF/services",
     // "-Djava.library.path=/Users/alessandro/Downloads/netty-tcnative-boringssl-static-2.0.30.Final-osx-x86_64/META-INF/native",
     "--verbose",
@@ -67,6 +67,7 @@ graalVMNativeImageOptions ++= Seq(
     "--no-fallback",
     // "--initialize-at-build-time=scala.runtime.EmptyMethodCache",
     // "--initialize-at-build-time=ch.qos.logback,com.fasterxml.jackson,fresh.graal,io.netty,io.reactivex,org.reactivestreams,org.slf4j"
+    s"-H:ReflectionConfigurationFiles=${baseDirectory.value}/src/native/reflectconfig.json",
 )
 
 enablePlugins(GraalVMNativeImagePlugin)
