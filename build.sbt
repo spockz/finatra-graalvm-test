@@ -1,5 +1,5 @@
 
-val finagleVersion = "20.5.0-SNAPSHOT"
+val finagleVersion = "20.4.1"
 
 lazy val exampleServerSettings = Seq(
   fork in run := true,
