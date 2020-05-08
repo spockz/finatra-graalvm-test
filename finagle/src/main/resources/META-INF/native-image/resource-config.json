@@ -1,0 +1,17 @@
+{
+  "resources":[
+    {"pattern":"\\QMETA-INF/services/com.twitter.finagle.FinagleInit\\E"}, 
+    {"pattern":"\\QMETA-INF/services/com.twitter.finagle.util.ServiceLoadedTimer\\E"}, 
+    {"pattern":"\\QMETA-INF/services/jdk.vm.ci.hotspot.HotSpotJVMCIBackendFactory\\E"}, 
+    {"pattern":"\\QMETA-INF/services/jdk.vm.ci.services.JVMCIServiceLocator\\E"}, 
+    {"pattern":"\\Qcom/fasterxml/jackson/module/scala/build.properties\\E"}, 
+    {"pattern":"\\Qcom/twitter/finagle-core/build.properties\\E"}, 
+    {"pattern":"\\Qcom/twitter/finagle/toggle/JsonToggleMap$JsonToggle.class\\E"}, 
+    {"pattern":"\\Qcom/twitter/finagle/toggle/JsonToggleMap$JsonToggles.class\\E"}, 
+    {"pattern":"\\Qcom/twitter/toggles/configs/com.twitter.finagle.core.json\\E"}, 
+    {"pattern":"\\Qcom/twitter/toggles/configs/com.twitter.finagle.http.json\\E"}, 
+    {"pattern":"\\Qlibrary.properties\\E"}, 
+    {"pattern":"\\Qorg/slf4j/impl/StaticLoggerBinder.class\\E"}
+  ],
+  "bundles":[]
+}
