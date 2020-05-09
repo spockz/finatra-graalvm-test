@@ -1,5 +1,5 @@
 
-val finagleVersion = "20.5.0-SNAPSHOT"
+val finagleVersion = "20.4.1"
 
 lazy val exampleServerSettings = Seq(
   fork in run := true,
@@ -26,13 +26,18 @@ lazy val exampleServerSettings = Seq(
     case "module-info.class" => MergeStrategy.last
     case "META-INF/io.netty.versions.properties" => MergeStrategy.last
     case other => MergeStrategy.defaultMergeStrategy(other)
-  }
-
+  },
+  unmanagedSourceDirectories in Compile += baseDirectory.value / "target" / "src_managed",
+  javaOptions in run ++= Seq(
+    s"-agentlib:native-image-agent=config-output-dir=${baseDirectory.value}/src/main/resources/META-INF/native-image",
+    "-DautoShutdown"
+  ),
+  // graalVMNativeImageGraalVersion := Some("20.0.0")
 )
 
 
 // libraryDependencies += "com.twitter" %% "finatra-httpclient" % finagleVersion exclude ("org.checkerframework", "checker-compat-qual") exclude ("io.netty", "netty-tcnative-boringssl-static")
-// graalVMNativeImageGraalVersion := Some("20.0.0")
+
 
 name := "test-finatra"
 
@@ -45,7 +50,7 @@ lazy val finagle = (project in file ("finagle"))
   .settings(exampleServerSettings)
   .settings(
     graalVMNativeImageOptions ++= Seq(
-      // "-H:Optimize=0", //Faster compilation iteration
+      "-H:Optimize=3", //Faster compilation iteration
       "--no-server",
       "--verbose",
       "-Dio.netty.noUnsafe=true",
@@ -55,6 +60,8 @@ lazy val finagle = (project in file ("finagle"))
       "--initialize-at-build-time=org.slf4j",
       "--initialize-at-build-time=ch.qos.logback",
       "--initialize-at-build-time=com.fasterxml.jackson.annotation.JsonProperty$Access",
+      // "--initialize-at-build-time=io.netty",
+      // "--initialize-at-run-time=sun.management.VMManagementImpl",
       // These two don't seme to have an effect
       "--initialize-at-run-time=io.netty.handler.codec.http2.Http2ServerUpgradeCodec",    
       // Could not find cause of CallConstruct being initialized so instead of delaying to to runtime, initialize whole of scala at build time
@@ -66,7 +73,6 @@ lazy val finagle = (project in file ("finagle"))
       "--initialize-at-run-time=io.netty.channel.epoll.EpollEventLoop,io.netty.channel.unix.Errors,io.netty.channel.unix.IovArray,io.netty.channel.unix.Socket",
       "--no-fallback",
       "--enable-http"
-      // s"-H:ReflectionConfigurationFiles=${baseDirectory.value}/src/main/resources/reflect-config.json",
     )
   )
 
